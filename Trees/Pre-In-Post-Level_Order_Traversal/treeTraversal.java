@@ -17,6 +17,42 @@ class TemplatedSoln {
         return res;
     }
 
+    public List<Integer> preorderTraversalPushAndOnlyCheckStack(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> sk = new Stack<>();
+        if (root == null) return res;
+        sk.push(root);
+        
+        while (!sk.empty()) {
+            TreeNode cur = sk.pop();
+            res.add(cur.val);
+            // Right first, then Left. 
+            if (cur.right != null) {
+                sk.push(cur.right);
+            }
+            if (cur.left != null) {
+                sk.push(cur.left);
+            }
+        }
+        return res;
+    }
+    // N-ary-preorder
+    public List<Integer> preorder-N-nary(Node root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {return res;}
+        Deque<Node> sk = new ArrayDeque<>();
+        sk.push(root);
+        while (!sk.isEmpty()) {
+            Node cur = sk.pop();
+            res.add(cur.val);
+            for (int i = cur.children.size() - 1; i >= 0; i--) {
+                sk.push(cur.children.get(i));
+            }
+            
+        }
+        return res;
+    }
+
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
@@ -58,91 +94,63 @@ class TemplatedSoln {
         return res;
     }
 
-    // Each level has 2^i, which == current Queue size
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res;
-        Queue<TreeNode> qq = new LinkedList<>();
-        qq.add(root);
-        while (!qq.isEmpty()) {
-            List<Integer> level = new ArrayList<>();
-            int count = qq.size();
-            for (int i = 0; i < count; i++) {
-                TreeNode cur = qq.poll();
-                level.add(cur.val);
-                if (cur.left != null) {
-                    qq.add(cur.left);
+    public List<Integer> postorderTraversalDoublePush(TreeNode root) {
+        Deque<TreeNode> stack=new LinkedList<>();
+        List<Integer> res=new ArrayList<>();
+        if(root==null) return res;
+        TreeNode cur=null;
+        stack.push(root);
+        stack.push(root);
+        
+        while(!stack.isEmpty()){
+            cur=stack.pop();
+            if(!stack.isEmpty()&&stack.peek()==cur){
+                if(cur.right!=null){
+                    stack.push(cur.right);
+                    stack.push(cur.right);
                 }
-                if (cur.right != null) {
-                    qq.add(cur.right);
-                }
-            }
-            res.add(level);
-        }
+                if(cur.left!=null){
+                    stack.push(cur.left);
+                    stack.push(cur.left);
+                }                
+                
+            }else{
+                res.add(cur.val);
+            }         
+        }        
         return res;
     }
 
-    // bottom up
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        LinkedList<List<Integer>> res = new LinkedList<>();
-        if (root == null) return res;
-        Queue<TreeNode> qq = new LinkedList<>();
-        qq.add(root);
-        while (!qq.isEmpty()) {
-            List<Integer> level = new ArrayList<>();
-            int count = qq.size();
-            for (int i = 0; i < count; i++) {
-                TreeNode cur = qq.poll();
-                level.add(cur.val);
-                if (cur.left != null) {
-                    qq.add(cur.left);
-                }
-                if (cur.right != null) {
-                    qq.add(cur.right);
-                }
-            }
-            res.add(0, level);
-        }
+    public List<Integer> postorder-N-ary-DoublePush(Node root) {
+        Deque<Node> sk =new LinkedList<>();
+        List<Integer> res=new ArrayList<>();
+        if(root==null) return res;
+        Node cur=null;
+        sk.push(root);
+        sk.push(root);
+        
+        while(!sk.isEmpty()){
+            cur = sk.pop();
+            if(!sk.isEmpty() && sk.peek()==cur){
+                // from right to left
+                for (int i = cur.children.size() - 1; i >= 0; i--) {
+                    Node c = cur.children.get(i);
+                    if (c != null) {
+                        sk.push(c);
+                        sk.push(c);
+                    }
+                }       
+                
+            } else {
+                res.add(cur.val);
+            }         
+        }        
         return res;
     }
 }
 
 class Recursive {
-    // level order BFS
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        levelHelper(res, root, 0);
-        return res;
-    }
-    
-    public void levelHelper(List<List<Integer>> res, TreeNode root, int height) {
-        if (root == null) return;
-        if (height >= res.size()) {
-            res.add(new LinkedList<Integer>());
-        }
-        res.get(height).add(root.val);
-        levelHelper(res, root.left, height+1);
-        levelHelper(res, root.right, height+1);
-    }
-
-    // bottom up BFS. Reverse array, or addFirst, and update size-1-height_th array item.
-    public List<List<Integer>> levelOrderBottomUp(TreeNode root) {
-        LinkedList<List<Integer>> res = new LinkedList<List<Integer>>();
-        levelHelper(res, root, 0);
-        return res;
-    }
-    
-    public void levelHelper(List<List<Integer>> res, TreeNode root, int height) {
-        if (root == null) return;
-        if (height >= res.size()) {
-            res.add(0, new LinkedList<Integer>());
-        }
-        res.get(res.size() - 1 - height).add(root.val);
-        levelHelper(res, root.left, height+1);
-        levelHelper(res, root.right, height+1);
-    }
-
-    // pre-in-post order recursive
+    /* Pre-order */
     public List<Integer> orderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {return res;}
@@ -156,7 +164,15 @@ class Recursive {
         traverse(root.left, res);
         traverse(root.right, res);
     }
+    public void Nnary-Preorder-helper(Node root, List<Integer> res) {
+        if (root == null) return;
+        res.add(root.val);
+        for (Node c : root.children) {
+            helper(c, res);
+        }
+    }
 
+    /* Inorder */
     public void inOrderTraverse(TreeNode root, List<Integer> res) {
         if (root != null) {
             traverse(root.left, res);
@@ -172,26 +188,12 @@ class Recursive {
             res.add(root.val);
         }
     }
-}
-
-class UnTemplated{
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> sk = new Stack<>();
-        if (root == null) return res;
-        sk.push(root);
-        
-        while (!sk.empty()) {
-            TreeNode cur = sk.pop();
-            res.add(cur.val);
-            // Right first, then Left. 
-            if (cur.right != null) {
-                sk.push(cur.right);
+    public void postOrder-N-ary(Node root, List<Integer> res) {
+        if (root != null) {
+            for (Node n : root.children) {
+                helper(n, res);
             }
-            if (cur.left != null) {
-                sk.push(cur.left);
-            }
+            res.add(root.val);
         }
-        return res;
     }
 }
