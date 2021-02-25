@@ -47,6 +47,36 @@ class DFS {
         return res;
     }
 
+    // ZigZag
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        Queue<TreeNode> qq = new LinkedList<>();
+        qq.add(root);
+        boolean leftToRight = true;
+        while (!qq.isEmpty()) {
+            List<Integer> level = new LinkedList<>();
+            int count = qq.size();
+            for (int i = 0; i < count; i++) {
+                TreeNode cur = qq.poll();
+                if (leftToRight) {
+                    level.add(cur.val);
+                } else {
+                    level.add(0, cur.val);
+                }
+                if (cur.left != null) {
+                    qq.add(cur.left);
+                }
+                if (cur.right != null) {
+                    qq.add(cur.right);
+                }
+            }
+            leftToRight = !leftToRight;
+            res.add(level);
+        }
+        return res;
+    }
+
     // N-ary
     public List<List<Integer>> levelOrder-N-nary(Node root) {
         List<List<Integer>> res = new ArrayList<>();
@@ -115,6 +145,30 @@ class BFS {
         res.get(res.size() - 1 - height).add(root.val);
         levelHelper(res, root.left, height+1);
         levelHelper(res, root.right, height+1);
+    }
+
+    // ZigZag BFS
+    public List<List<Integer>> zigzagLevelOrderBFS(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        boolean leftRight = true;
+        levelHelper(res, root, 0, true);
+        return res;
+    }
+    
+    public void levelHelper(List<List<Integer>> res, TreeNode root, int height, boolean leftRight) {
+        if (root == null) return;
+        List<Integer> list = (res.size() > height) ? res.get(height) : new LinkedList<Integer>();
+        if (leftRight) {
+            list.add(root.val);
+        } else {
+            list.add(0, root.val);
+        }
+        leftRight = !leftRight;
+        if (res.size() <= height) {
+            res.add(list);
+        }
+        levelHelper(res, root.left, height+1, leftRight);
+        levelHelper(res, root.right, height+1, leftRight);
     }
 
     // N-nary-level order
