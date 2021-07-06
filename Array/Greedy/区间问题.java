@@ -16,6 +16,8 @@ Example 3:
 Input: intervals = [[1,2],[2,3]]
 Output: 0
 Explanation: You don't need to remove any of the intervals since they're already non-overlapping.*/
+
+/*罗志祥要和 N人约会，怎么miss掉最少的小姐姐 --> 先排序，查是否overlap，如果重叠，就选择结束早的，这样能继续后面的可能性越大.  */
 public int eraseOverlapIntervals(int[][] intervals) {
     // validations
     // 按interval 开头排序
