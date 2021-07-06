@@ -148,6 +148,7 @@ class BFS {
     }
 
     // ZigZag BFS
+    // Or can level % 2 and tell
     public List<List<Integer>> zigzagLevelOrderBFS(TreeNode root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         boolean leftRight = true;

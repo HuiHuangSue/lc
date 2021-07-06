@@ -1,4 +1,5 @@
 class TemplatedSoln {
+    // 144
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {return res;}
@@ -104,7 +105,7 @@ class TemplatedSoln {
         
         while(!stack.isEmpty()){
             cur=stack.pop();
-            if(!stack.isEmpty()&&stack.peek()==cur){
+            if(!stack.isEmpty() && stack.peek()==cur){
                 if(cur.right!=null){
                     stack.push(cur.right);
                     stack.push(cur.right);
