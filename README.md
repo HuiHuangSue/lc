@@ -15,17 +15,15 @@ LinkedList: heavy on write, less on reads
   - Insert/Delete O(1)
     - head/Middle: new node next->originalHead, head=new head; tail O(1)
  
- Stack (push, pop, dish stack, O(1) 
+Stack (push, pop, dish stack, O(1) 
    - implemet recursion, webpage navigation of back button
  
- Queue (enqueue, dequeue, craw URL
+Queue (enqueue, dequeue, craw URL
    - if (rear+1)%arrlen == front --> full; else arr[rear]=target; rear = rear + 1)%arrlen
    - if (rear == front) --> empty!; ele = arr[front]; front=(front+1）%arrlen
  
- Deque
+Deque
  
- Priority Queue
-
 HashMap
   - colliion, resize (capaity * load factor-default0.75)
 
@@ -36,3 +34,16 @@ Tree (BST)
   - balance: AVL, Red-black, Treap(BST+Heap)
   - Traverse: DFS (root优先): Pre, In, Post; BFS: Level
 
+Heap/PriorityQueue
+  - enqueue/insert, at the end, then bubble up O(logn)
+  - dequeue/delete, remove root(pop), then swap with last element, bubble down O(logn)
+  - build. From the last non-leaf node, bubble down O(n) 
+
+
+Sorting
+ - Stable: Merge, Insertion, Bubble, Selection, Counting/Radix
+ - Non-stable: Quick, heap
+ - Bubble/cocktail(bi-directional)
+ - Quicksort, pivot, left/right swap; then final left=right swap with pivot. If pivot is max/min, still N^2
+ - Heapsort: lEFT CHILD: 2I+1; r: 2i+2
+ - Counting/Bucket: Range(Max-Min) not too big, bucket range not too sparse.
