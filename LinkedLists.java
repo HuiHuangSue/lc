@@ -124,3 +124,25 @@ public List<Integer> addToArrayForm989(int[] num, int k) {
     }
     return res;
 }
+
+public String multiplytring43(String nums1, String nums2) {
+    if (nums1 == null || nums1.length() == 0 || nums2 == null || nums2.length() == 0) return "0";
+    int[] digits = new int[nums1.length() + nums2.length()];//len total
+    StringBuilder res = new StringBuilder();
+    for(int i = nums1.length()-1; i>=0;i--) {
+        for(int j = nums2.length() - 1; j >= 0; j--) {
+            int product = (nums1.charAt(i) - '0') * (nums2.charAt(j) - '0');
+            int p1 = i + j, p2 = i + j + 1; //everytime, p1=i+j; i+j+1
+            int sum = product + digits[p2];//settle down digits p1,p2
+            digits[p1] += sum / 10; //carry
+            digits[p2] = sum % 10;
+        }
+    }
+    // digits[0,0,1,0,3];
+    for(int digit : digits) {
+        if(!(digit == 0 && res.length() == 0)) {//leading 0s
+            res.append(digit);
+        }
+    }
+    return res.length() == 0 ? "0" : res.toString();
+}

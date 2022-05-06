@@ -205,13 +205,15 @@ public int findBottomLeftValue513(TreeNode root) {
      qq.offer(root);
     while(!qq.isEmpty()) {//can also Queue<>...=new LinkedList<>();then qq.poll()
         int curLevelSize = qq.size();
-        // res = qq.peek().val;
-        // for (int i = 0; i < curLevelSize; i++) {
-        //     TreeNode cur = qq.poll();
-        //     if (cur.left != null) qq.add(cur.left);
-        //     if (cur.right != null) qq.add(cur.right);}
+
+        // Method1: store & override first value of the row
+        res = qq.peek().val;
+        for (int i = 0; i < curLevelSize; i++) {
+            TreeNode cur = qq.poll();
+            if (cur.left != null) qq.add(cur.left);
+            if (cur.right != null) qq.add(cur.right);}
         
-        // from right to left, track & override first value of last row
+        // Method 2: from right to left, track & override first value of last row
         for (int i = 0; i < curLevelSize; i++) {
             TreeNode cur = qq.poll();
             res = cur.val;
@@ -311,4 +313,60 @@ class BFS {
         }
     }
 
+}
+
+public int minDepth111(TreeNode root) {
+    int depth = 0;
+    Queue<TreeNode> qq = new ArrayDeque<>();
+    if(root == null) return depth;
+    qq.offer(root);
+    while(!qq.isEmpty()) {
+        int size = qq.size();
+        depth++;
+        for(int i = 0; i < size; i++) {
+            TreeNode cur = qq.poll();
+            if(cur.right == null && cur.left == null) {
+                return depth;
+            }
+            if(cur.left != null) qq.offer(cur.left);
+            if(cur.right != null) qq.offer(cur.right);
+        }
+    }
+    return 0;
+}
+public int maxDepth104(TreeNode root) {
+    int depth = 0;
+    Queue<TreeNode> qq = new ArrayDeque<>();
+    if(root == null) return depth;
+    qq.offer(root);
+    while(!qq.isEmpty()) {
+        int size = qq.size();
+        depth++;
+        for(int i = 0; i < size; i++) {
+            TreeNode cur = qq.poll();
+            if(cur.left != null) qq.offer(cur.left);
+            if(cur.right != null) qq.offer(cur.right);
+        }
+    }
+    return depth;
+}
+public List<ListNode> binaryTreeToListsLin242(TreeNode root) {
+    List<ListNode> res = new ArrayList<>();
+    if (root == null) return res;
+    Queue<TreeNode> qq = new ArrayDeque<>();
+    qq.offer(root);
+    while(!qq.isEmpty()) {
+        int size = qq.size();
+        ListNode dummyPre = new ListNode(-1); //notice how initialize
+        ListNode current = dummyPre;
+        for (int i = 0; i < size; i++) {
+            TreeNode cur = qq.poll();
+            current.next = new ListNode(cur.val);
+            current = current.next;
+            if(cur.left != null) qq.offer(cur.left);
+            if(cur.right != null) qq.offer(cur.right);
+        }
+        res.add(dummyPre.next);
+    }
+    return res;
 }

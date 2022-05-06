@@ -51,41 +51,41 @@ public class TopologicalSortBFS {
 
 public class TopologicalSortDFS {
     public ArrayList<DirectedGraphNode> topSort(ArrayList<DirectedGraphNode> graph) {
-        Map<DirectedGraphNode, Integer> indegree = new HashMap<>();
-        for (DirectedGraphNode node : graph) {
-            indegree.put(node, 0);
-        }
-        for (DirectedGraphNode node : graph) {
-            for (DirectedGraphNode neighbor : node.neighbors) {
-                indegree.put(neighbor, indegree.get(neighbor) + 1);
+        ArrayList<DirectedGraphNode> result = new ArrayList<>();
+        HashMap<DirectedGraphNode, Integer> map = new HashMap<>();
+        
+        int nodeCount = 0;
+        for(DirectedGraphNode vertex : graph) {
+            for(DirectedGraphNode neighbor : vertex.neighbors) {
+                nodeCount += 1;
+                map.put(neighbor, map.getOrDefault(neighbor, 0) + 1);
             }
         }
-        ArrayList<DirectedGraphNode> result = new ArrayList<>();
-        DirectedGraphNode root = get0IndegreeNode(indegree);
-        while (root != null) {
-            result.add(root);
-            dfs(result, indegree, root);
-            root = get0IndegreeNode(indegree);
+        
+        boolean[] visited = new boolean[nodeCount];
+        Stack<DirectedGraphNode> sk = new Stack<>();
+        
+        for(DirectedGraphNode vertex : graph) {
+            if(!map.containsKey(vertex)) {
+                dfsHelper(vertex, visited, sk);
+            }
+        }
+        
+        while(!sk.isEmpty()) {
+            result.add(sk.pop());
         }
         return result;
     }
-    DirectedGraphNode get0IndegreeNode(Map<DirectedGraphNode, Integer> indegree) {
-        for (Map.Entry<DirectedGraphNode, Integer> entry : indegree.entrySet()) {
-            if (entry.getValue() == 0) {
-                return entry.getKey();
+    
+    private void dfsHelper(DirectedGraphNode vertex, boolean[] visited, Stack<DirectedGraphNode> sk) {
+        visited[vertex.label] = true;
+        for(DirectedGraphNode neighbor: vertex.neighbors) {
+            if(visited[neighbor.label]) {
+                continue;
             }
+            dfsHelper(neighbor, visited, sk);
         }
-        return null;
-    }
-    void dfs(List<DirectedGraphNode> result, Map<DirectedGraphNode, Integer> indegree, DirectedGraphNode root) {
-        indegree.put(root, -1);
-        for (DirectedGraphNode neighbor : root.neighbors) {
-            indegree.put(neighbor, indegree.get(neighbor) - 1);
-            if (indegree.get(neighbor) == 0) {
-                result.add(neighbor);
-                dfs(result, indegree, neighbor);
-            }
-        }
+        sk.push(vertex);//push to stack once completed
     }
 }
  
