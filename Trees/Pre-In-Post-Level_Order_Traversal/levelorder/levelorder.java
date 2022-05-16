@@ -67,7 +67,7 @@ public class CodecBFS {
         return sb.toString();
     }
         public TreeNode deserialize(String data) {
-        if (data == null || data.length() == 0) return null;
+        if (data == null || data.length() == 0) return null; //not data==null otherwise fail []
         String[] vals = data.split(",");
         if (vals == null || vals.length == 0) return null;
         
