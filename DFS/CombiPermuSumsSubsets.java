@@ -1,7 +1,8 @@
-https://leetcode.com/problems/combination-sum/discuss/16502/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+public class Backtrack {
+    // https://leetcode.com/problems/combination-sum/discuss/16502/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
 
-Input: nums = [1,2,3]
-Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+/*Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]*/
 public List<List<Integer>> subsets(int[] nums) {
     List<List<Integer>> res = new ArrayList<>();
     List<Integer> curList = new ArrayList<>();
@@ -16,8 +17,9 @@ private void backtrack(int[] nums, List<List<Integer>> res, List<Integer> curLis
        curList.remove(curList.size() - 1);
     }
 }
-Input: nums = [1,2,2]
-Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+/* Input: nums = [1,2,2]
+    Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+    */
 public List<List<Integer>> subsetsWithDup(int[] nums) {
     List<List<Integer>> res = new ArrayList<>();
     List<Integer> curList = new ArrayList<>();
@@ -161,3 +163,5 @@ private void backtrack(int[] nums, List<List<Integer>> res, List<Integer> curLis
        }
     }
 }
+}
+
