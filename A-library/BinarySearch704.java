@@ -17,17 +17,32 @@ public class BinarySearch704 {
 
     // sorted in ascending; logn --> binary search; all numbers unique. 
 
-
-    public int search704(int[] nums, int t) { //[left,right]
-        int l = 0, r = nums.length - 1;
-        while(l <= r) { // left=right is valid, so so not skip
-            int mid = l + (r - l) / 2;
+    // [704 Binary Search](https://leetcode.com/problems/binary-search/)
+    public int search704I(int[] nums, int t) { //[Left,Right]
+        // [-1,0,3,5,9,12] t=9
+        int left = 0, right = nums.length - 1;
+        while (left <= right) { // [left, right]
+            int mid = left + (right - left) / 2;
             if (nums[mid] == t) {
                 return mid;
-            } else if (nums[mid] < t) {
-                l = mid + 1; //mid is already checked not t
-            } else {
-                r = mid - 1;
+            } else if (nums[mid] < t) { // t = 9, search right interval
+                left = mid + 1; // mid is not answer, skip
+            } else { // t = 0, search left interval
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+    public int search704II(int[] nums, int t) { //[Left, right)
+        int left = 0, right = nums.length; // right), so not include right
+        while(left < right) { //[1,1) invalid, left=right is invalid range.
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == t) {
+                return mid;
+            } else if (nums[mid] < t) { // updating left bound
+                left = mid + 1; // mid cannot be answer, so can skip
+            } else { // updating right bound, right not included, can be next answer
+                right = mid;
             }
         }
         return -1;
