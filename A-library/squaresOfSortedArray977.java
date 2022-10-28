@@ -1,4 +1,4 @@
-public class SquaresOfSortedArray977 {
+public class squaresOfSortedArray977 {
     /* Given an integer array nums sorted in non-decreasing order, 
     return an array of the squares of each number sorted in non-decreasing order.
     Input: nums = [-4,-1,0,3,10], Output: [0,1,9,16,100]
@@ -7,7 +7,7 @@ public class SquaresOfSortedArray977 {
     */
 
     public int[] sortedSquares双指针(int[] nums) { // O(n), space O(n)
-        // already sorted, so just compare 2 ends. 
+        // already sorted, so just compare 2 ends in case there're negative nums. 
         int left = 0, right = nums.length - 1, index = right;
         int[] res = new int[nums.length]; // must initiate new array to not override and mess up...
         while (left <= right) {
