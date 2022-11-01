@@ -165,7 +165,7 @@ public class BinarySearchBasics {
     public int[] searchRange34II(int[] nums, int target) {
         int leftBorder = getLeftBorder(nums, target);
         int rightBorder = getRightBorder(nums, target);
-        System.out.println(leftBorder + " " + rightBorder);
+        System.out.println(leftBorder + " " + rightBorder); //// [5,7,7,8,8,10] t=6 -->[1,0]
         //[5,7,7,8,10], 8 --> 2,4
         // 情况一
         if (leftBorder == -200 || rightBorder == -1000) return new int[]{-1, -1}; //【2，2】，3
@@ -183,7 +183,7 @@ public class BinarySearchBasics {
             int middle = left + ((right - left) / 2);
             if (nums[middle] > target) {
                 right = middle - 1;
-            } else { // 寻找右边界，nums[middle] == target的时候更新left
+            } else { // <, or =, still look for right side. 
                 left = middle + 1;
                 // rightBorder = left;
             }

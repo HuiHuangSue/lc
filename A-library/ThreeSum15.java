@@ -1,4 +1,4 @@
-public class ThreeSum15 {
+public class threeSum15 {
     class Solution {
         // result a+b+c=0 --> C(n,2) as c is fixed already, O(n^2), 2sum is O(n)
         public List<List<Integer>> threeSum(int[] nums) {

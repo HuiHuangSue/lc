@@ -1,4 +1,4 @@
-public class LowestCommonAncestors235 {
+public class lowestCommonAncestors235 {
     // https://www.youtube.com/watch?v=gs2LMfuOR9k&ab_channel=NeetCode
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // max is tree's height O(logn); 

@@ -1,4 +1,4 @@
-public class TwoSumStructure170 {
+public class twoSumStructure170 {
     class TwoSum {
         // ask which function is used more frequently, add or find
         // address corner case [3,4,5], t=8, then not sure if there's ;4,4. Use map not set.

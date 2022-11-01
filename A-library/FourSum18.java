@@ -1,4 +1,4 @@
-public class FourSum18 {
+public class fourSum18 {
     class Solution {
         public List<List<Integer>> fourSum(int[] nums, int target) {
             Arrays.sort(nums); // remembers to sort

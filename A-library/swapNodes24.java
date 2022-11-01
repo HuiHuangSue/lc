@@ -29,6 +29,19 @@ class Solution {
             head = tmp;
         }
         return dummy.next;
+
+
+        // recursion
+        // base case
+        if (head == null || head.next == null) return head;
+        
+        ListNode nextNode = head.next;
+        // recursion
+        ListNode newNode = swapPairs(nextNode.next);
+        // swap
+        nextNode.next = head;
+        head.next = newNode;
+        return nextNode;
     }
 }
 }

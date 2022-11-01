@@ -1,4 +1,4 @@
-public class PartitionArrayLin31 {
+public class partitionArrayLin31 {
     // in quicksort, nums[right]>k, the pivot does not belong to left nor right
     // if set to 1 side, [1,1,1,1] to n^2
 

@@ -1,4 +1,4 @@
-public class ValidTriangle611 {
+public class validTriangle611 {
     class Solution {
         public int triangleNumber(int[] nums) {
             // from n^3 --> 
