@@ -18,6 +18,22 @@ public class ransomNote383 {
     Output: true
 */
     public boolean canConstruct(String ransomNote, String magazine) {
+
+        int[] map = new int[26];
+        // magazine 的++, ransomNote的--，这样<0补不全的就不行
+        // 否则，ransom的++, magazine的总有--的
+        for(char c : magazine.toCharArray()){
+            map[c - 'a']++;
+        }
+        for(char c : ransomNote.toCharArray()){
+            map[c - 'a']--;
+        }
+        for (int i : map) {
+            if (i < 0) return false;
+        }
+        return true;
+
+        
         Map<Character, Integer> ransomMap = new HashMap<>();
         Map<Character, Integer> magMap = new HashMap<>();
         for(int i = 0; i < ransomNote.length(); i++) {
