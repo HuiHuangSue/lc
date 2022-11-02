@@ -7,7 +7,8 @@ public class threeSum15 {
             
             Arrays.sort(nums); // remembers to sort
             for(int i = 0; i < nums.length - 2; i++) { // first index stops at len-2
-                if (nums[i] > 0) return res; // quick check, if 1 num already >0 after sorted, latter ones must be even bigger
+                if (nums[i] > 0) return res; 
+                // quick check, if 1 num already >0 after sorted, latter ones must be even bigger.  if has negative target, make sure it's >0 && > target. 
                 if (i > 0 && nums[i] == nums[i - 1]) continue; // i > 0
                 int left = i + 1, right = nums.length - 1;
                 while (left < right) {

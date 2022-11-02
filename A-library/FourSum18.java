@@ -4,6 +4,7 @@ public class fourSum18 {
             Arrays.sort(nums); // remembers to sort
             List<List<Integer>> res = new ArrayList<>();
             for(int i = 0; i < nums.length - 3; i++) { // first index stops at len-2
+                if (nums[i] > 0 && nums[i] > t) return res; // otherwise [-5,-4,-3,-2] can go -11 but stopped
                 if (i > 0 && nums[i] == nums[i - 1]) continue; // i > 0
     
                 for (int j = i + 1; j < nums.length - 2; j++) {
