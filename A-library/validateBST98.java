@@ -1,19 +1,31 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
+public class validateBST98 {
+
+    /* Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+    A valid BST is defined as follows:
+    
+    The left subtree of a node contains only nodes with keys less than the node's key.
+    The right subtree of a node contains only nodes with keys greater than the node's key.
+    Both the left and right subtrees must also be binary search trees.
+    */
+    class Solution {
+        public boolean isValidBST(TreeNode root) {
+            return isValidBSTHelper(root, null, null);
+        }
+        private boolean isValidBSTHelper(TreeNode root, TreeNode min, TreeNode max) {
+            if (root == null) return true;
+            if (min != null && root.val <= min.val) return false; // = is illegal by definition
+            if (max != null && root.val >= max.val) return false;
+            return isValidBSTHelper(root.left, min, root) && isValidBSTHelper(root.right, root, max);
+        }
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left, right;
+        // constructors (default, [val], [val, left, right],)
+    }
+
+    class Solution {
     // 1. In-order traversal
     // 2. Recursion with backtrack
     // 3. use 3 stacks
@@ -99,4 +111,5 @@ class Solution {
     }
 
 
+    }
 }

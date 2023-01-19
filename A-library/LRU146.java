@@ -69,7 +69,7 @@ public class LRU146 {
 
         private int size;
         private int capacity;
-        private HashMap<Integer, DLinkedNode> cache;
+        private HashMap<Integer, DLinkedNode> cache; // key, <key-value>
         public LRUCache(int capacity) {
             this.size = 0;
             this.capacity = capacity;
