@@ -8,6 +8,9 @@ class MinStack155 {
 
     public void push(int val) {
          //needs to be <=, otherwise miss pushing adding second 0 of 0,1,0 to minsk. when pop first
+         // mainSk: 0,1,0
+         // minSk:  0,0
+         // pop(), if no val <=, then 0,1,0 min 0; after popping 0, no minSk though main has 0,1 left
         mainSk.push(val);
         if (minSk.isEmpty() || val <= minSk.peek()) {
             minSk.push(val);
