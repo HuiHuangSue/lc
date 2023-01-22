@@ -69,7 +69,7 @@ Depending on your language, the stack may not be supported natively. You may sim
     }
 
 
-    class MyQueue {
+    class MyQueue { // pretend s1 as the real queue. s2 as reversed queue
         Stack<Integer> s1, s2;
     
         public MyQueue() {
@@ -79,6 +79,7 @@ Depending on your language, the stack may not be supported natively. You may sim
         
         /** Push element x to the back of queue. */
         void push(int x) {
+            // transfer what s2 has to s1
             while (!s2.isEmpty()) {
                 s1.push(s2.pop());
             }
@@ -91,7 +92,7 @@ Depending on your language, the stack may not be supported natively. You may sim
             // 1,2,3,4，sk will pop 4, but we want queue pop 1; move all sk1 to sk2 reversely
             while(!s1.isEmpty()) {
                 s2.push(s1.pop());
-            }
+            } // s2 becomes 4,3,2,1, then s2.pop() will pop 1 out. 
             return s2.pop();
         }
     
