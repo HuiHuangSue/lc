@@ -53,26 +53,7 @@ public ListNode addTwoNumbers445(ListNode l1, ListNode l2) {
 }
 // num1 = "11", num2 = "123" --> "134"
 public String addStrings415(String num1, String num2) {
-    int i = num1.length() - 1, j = num2.length() - 1;
-    StringBuilder sb = new StringBuilder();
-    int carry = 0;
-    while(i >= 0 || j >= 0) {
-        int sum = carry;//sum should be refreshed
-        if(i >= 0) {
-            sum += (num1.charAt(i) - '0');
-            i--;
-        }
-        if(j >= 0) {
-            sum += (num2.charAt(j) - '0');
-            j--;
-        }
-        sb.insert(0, (sum % 10));
-        carry = sum/10;
-    }
-    if(carry > 0) {
-        sb.insert(0, carry);
-    }
-    return sb.toString();//can keep appending & reverse at end
+    https://github.com/HuiHuangSue/lc/blob/main/A-library/addString415.java
 }
 //Input: a = "1010", b = "1011" --> "10101"
 public String addBinary67(String a, String b) {
