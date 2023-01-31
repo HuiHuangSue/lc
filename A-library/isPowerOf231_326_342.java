@@ -24,6 +24,9 @@ public boolean isPowerOfThree326(int n) {
 }
 
 public boolean isPowerOfFour342(int n) {
+    // Convert to base 4, then match 10start, with 000...
+    return Integer.toString(n, 4).matches("^10*$");
+
     // M1: keep dividing
     if (n < 1) return false; // 4^0=1
     while (n % 4 == 0) {

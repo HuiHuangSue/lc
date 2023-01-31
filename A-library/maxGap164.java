@@ -12,6 +12,8 @@ class maxGap164 {
     public int maximumGap(int[] nums) {
         if (nums == null || nums.length < 2) return 0;
 
+        // Integer max = lists.stream().mapToInt(v -> v).max().orElseThrow(NoSuchElementException::new);
+
         // Get minValue and maxValue
         int maxVal = nums[0], minVal = nums[0];
         for( int i = 1; i < nums.length; i++) {
@@ -21,10 +23,12 @@ class maxGap164 {
         if (maxVal - minVal == 0) return 0; // all numbers are same
 
         // initialize buckets. len numbers, n-1 segments
+        // 每个桶能装bucketSize的范围
         // the smallest possible maximum gap is (max-min)/(len-1)
-        int bucketSize = Math.max(1, (maxVal - minVal) / (nums.length - 1)); // could be just 1
+        int bucketSize = Math.max(1, (maxVal - minVal) / (nums.length - 1)); // could be just 1, or (32760-0)/9722
         List<List<Integer>> buckets = new ArrayList<>();
-        for(int i = 0; i <= ((maxVal - minVal) / bucketSize); i++) { // cannot use nums.length, as could n-minVal)/bucketSize can be out of bound; (can be just 0)
+        int bucketCount = (maxVal - minVal) / bucketSize;
+        for(int i = 0; i <= bucketCount; i++) { // 区间/大小=桶的数量
             buckets.add(new ArrayList<Integer>());
         }
 
@@ -37,15 +41,16 @@ class maxGap164 {
 
         // go through all buckets, compare NEIGHBORS [min1,max1][min2,max2][min3,max3]...
         int maxDistance = 0; // maxDistance = curMin - prevMax; 
-        // need curMax to track for prevMax 
+        // need curMax to track for prevMax, prevMax and curMax 是来自不同桶的
         int curMax = 0; // first bucket can be empty, so initializing in for loop.
         for(List<Integer> b : buckets) {
             if(b.size() == 0) continue; // empty buckets
             int prevMax = curMax > 0 ? curMax : b.get(0); // initialize to first non-empty bucket value
+            // curMax 保留了之前桶的max，所以prevMax用它来更新
             int curLow = b.get(0);
             for(int n : b){
                 curLow = Math.min(curLow, n);
-                curMax = Math.max(curMax, n);
+                curMax = Math.max(curMax, n); // 目前筒的max，下个桶会存成prevmax的值
             }
             maxDistance = Math.max(maxDistance, curLow - prevMax);
         }

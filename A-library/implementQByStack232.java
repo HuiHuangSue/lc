@@ -99,7 +99,7 @@ Depending on your language, the stack may not be supported natively. You may sim
         /** Get the front element. */
         int peek() {
             int res = this.pop(); // 直接使用已有的pop函数
-            s1.push(res); // 因为pop函数弹出了元素res，所以再添加回去
+            s1.push(res); // 因为pop函数弹出了元素res，所以再添加回去s1, 不是自己的push
             return res;
         }
     

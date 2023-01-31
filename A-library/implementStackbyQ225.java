@@ -1,10 +1,10 @@
 public class implementStackbyQ225 {
     class MyStack {
 
-        Queue<Integer> qq;
+        Queue<Integer> qq; 
     
         public MyStack() {
-            qq = new LinkedList<>();
+            qq = new LinkedList<>();// add at end, remove at front.
         }
         
         public void push(int x) {

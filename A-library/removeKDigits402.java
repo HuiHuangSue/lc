@@ -1,7 +1,18 @@
 class Solution {
+    /* from left to right, 4>3, 3>2, 2>1,相当于交换位置
+     * Input: num = "1432219", k = 3
+        Output: "1219"
+        Explanation: Remove the three digits 4, 3, and 2 to form the new number 1219 which is the smallest.
+        Input: num = "10200", k = 1
+        Output: "200"
+        Explanation: Remove the leading 1 and the number is 200. Note that the output must not contain leading zeroes.
+        Input: num = "10", k = 2
+        Output: "0"
+        Explanation: Remove all the digits from the number and it is left with nothing which is 0.
+     */
     public String removeKdigits402(String num, int k) {
        Stack<Character> stack = new Stack<>();
-        for(char digit : num.toCharArray()) {
+        for(char digit : num.toCharArray()) { // KEEP POPPING using WHILE, not If
             while(!stack.isEmpty() && k > 0 && stack.peek() > digit) { // = will fail 112. 只pop比她大的，多的之后还可以处理
                 stack.pop();
                 k -= 1;

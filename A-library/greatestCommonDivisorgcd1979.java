@@ -9,10 +9,12 @@ public class greatestCommonDivisorgcd1979 {
     }
 
     private int gcd(int a, int b) {
+        // 只有第一种单用，后面的都要先比对大小 gcd(a,b)=gcd(b, a%b);
         // Method 1: gcd(a,b) = gcd(b,a%b), stop at b==0
         if (b == 0) return a;
         return gcd(b, a % b); 
 
+        //-----------------------------------------------------------------------------------
         // Method 2 & 3
         int big = a > b ? a : b;
         int small = a < b ? a : b;

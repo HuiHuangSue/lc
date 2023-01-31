@@ -2,7 +2,7 @@ class Solution {
     public int nextGreaterElementIII556(int n) {
         // refactor steps in helper functions, private static helper123
         // smallest: 12345, biggest 54321
-        // 12354 --> 12535
+        // 12354 --> 12453 --> 12435
         // 1233633 --> 123 6333
         char[] arr = ("" + n).toCharArray();
         int i = arr.length - 2; // at 5
@@ -11,6 +11,7 @@ class Solution {
             i--;
         }
         if (i < 0) { // already decreasing order, which is maximum 54321
+            // == 0 not in; once i==0, i goes in and has been --; 
             return -1;
         } // i at 3
         // 2. find smallest number that's greater than arr[i]
@@ -23,7 +24,7 @@ class Solution {
         // return Integer.parseInt(new String(arr));
         try {
             return Integer.parseInt(new String(arr));
-        } catch (Exception e) {
+        } catch (Exception e) { // in case after transformation out of bound. eg 2147483647-->2147483674 OutOfBound
             return -1;
         }
     }
