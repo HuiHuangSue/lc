@@ -2,7 +2,7 @@ public class spiralMatrixI54 {
      /*
     Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
     1 -> 2 -> 3 -> 4         1  -> 2  -> 3  -> 4
-                   5  -->    10 -> 11 -> 12 -> 5  
+                   5  -->    10 -> 11 -> 12 -> 5
     9 <- 8 <- 7 <- 6         9  <- 8 <-  7  <- 6
     */
 
@@ -29,8 +29,8 @@ public class spiralMatrixI54 {
                     // bottom row fixed, col right to left
                     for (int i = colEnd; i >= colBegin; i--) {
                         res.add(matrix[rowEnd][i]);
-                    }          
-                    rowEnd--; 
+                    }
+                    rowEnd--;
                 }
                 if (colBegin <= colEnd) { // keep checking, ow goes back repeat
                     // left column fixed, row bottom to top
@@ -48,8 +48,8 @@ public class spiralMatrixI54 {
 public class spiralMatrixII59 {
     /*
     Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
-    1 -> 2 -> 3         1 -> 2 -> 3   
-              4  -->     8 -> 9    4  
+    1 -> 2 -> 3         1 -> 2 -> 3
+              4  -->     8 -> 9   4
     7 <- 6 <- 5         7 <- 6 <- 5
     */
 
@@ -67,7 +67,7 @@ public class spiralMatrixII59 {
                 index++;
             }
             rowBegin++; // update!!!
-            
+
             // col fixed, up to down
             for (int i = rowBegin; i <= rowEnd; i++) {
                 res[i][colEnd] = index;
@@ -119,7 +119,7 @@ class Solution {
                 count--;
             }
             rowBegin++; // update!!!
-                
+
             // col fixed, up to down
             for (int i = rowBegin; head != null && i <= rowEnd; i++) {
                 res[i][colEnd] = head.val;
@@ -142,7 +142,7 @@ class Solution {
                 head=head.next;
                 count--;
             }
-            colBegin++;    
+            colBegin++;
         }
         return res;
     }
