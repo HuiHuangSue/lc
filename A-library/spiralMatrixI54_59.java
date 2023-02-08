@@ -93,3 +93,57 @@ public class spiralMatrixII59 {
     }
 }
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int[][] spiralMatrix2326(int m, int n, ListNode head) {
+        int[][] res = new int[m][n];
+        for(int i = 0; i < m; i++) {
+            Arrays.fill(res[i], -1);
+        }
+        int rowBegin = 0, rowEnd = m - 1;
+        int colBegin = 0, colEnd = n - 1;
+        int count = m * n;
+        while (rowBegin <= rowEnd && colBegin <= colEnd) {
+            for (int i = colBegin; head != null && i <= colEnd; i++) {
+                res[rowBegin][i] = head.val;
+                head = head.next;
+                count--;
+            }
+            rowBegin++; // update!!!
+                
+            // col fixed, up to down
+            for (int i = rowBegin; head != null && i <= rowEnd; i++) {
+                res[i][colEnd] = head.val;
+                head=head.next;
+                count--;
+            }
+            colEnd--;
+
+            // row fixed, right to left
+            for (int i = colEnd; head != null && i >= colBegin; i--) {
+                res[rowEnd][i] = head.val;
+                head=head.next;
+                count--;
+            }
+            rowEnd--;
+
+            // col fixed, down to up
+            for (int i = rowEnd; head != null && i >= rowBegin; i--) {
+                res[i][colBegin] = head.val;
+                head=head.next;
+                count--;
+            }
+            colBegin++;    
+        }
+        return res;
+    }
+}

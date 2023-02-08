@@ -11,6 +11,10 @@ public class LRU146 {
         private int capacity;
 
         public LRUCache(int capacity) {
+            // default 0.75 load factor
+            //   offers good tradeoff btw lookup time and space cost
+            //   when 3/4 full, rehash. 越高越慢
+            // true is access order; false is insertion order;
             super(capacity, 0.75f, true);// call to super must be the first statement in class
             this.capacity = capacity;
         }
@@ -142,10 +146,6 @@ public class LRU146 {
         private LinkedHashMap<Integer, Integer> map;
     
         public LRUCache(int capacity) {
-            // default 0.75 load factor
-            //   offers good tradeoff btw lookup time and space cost
-            //   when 3/4 full, rehash. 越高越慢
-            // true is access order; false is insertion order;
             map = new LinkedHashMap<>(capacity, 0.75f, true) {
                 protected boolean removeEldestEntry(Map.Entry<Integer, Integer> entry) {
                     return map.size() > CAPACITY;
