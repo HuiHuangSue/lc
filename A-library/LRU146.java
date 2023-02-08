@@ -1,9 +1,9 @@
 public class LRU146 {
-/*  
+/*
     Phone app display on screen. Max 3. When 4th come, oldest pop out.
     1. Requirements: O(1) on search, delete; Needs to track order --> HashMap + LinkedList --> Built-in LinkedHashMap
         Main:
-        int capacity 
+        int capacity
         int put(key, val) // O(1)
         int get(key) // O(1)
 */
@@ -18,11 +18,11 @@ public class LRU146 {
             super(capacity, 0.75f, true);// call to super must be the first statement in class
             this.capacity = capacity;
         }
-        
+
         public int get(int key) {
             return super.getOrDefault(key, -1);
         }
-        
+
         public void put(int key, int value) {
             super.put(key, value);
         }
@@ -32,10 +32,11 @@ public class LRU146 {
             return size() > capacity;
         }
     }
-    
+
 /*
     2. Double linked list. Need to remove at O(1). 。
-    删除⼀个节点不光要得到该节点本⾝的指针，也需要操作其前驱节点的指针，⽽双向链表才能⽀持直接查找前驱，保证 O(1) 。
+    删除⼀个节点不光要得到该节点本⾝的指针，也需要操作其前驱节点的指针，⽽双向链表才能⽀持直接查找前驱，保证 O(1)
+    declare DLinkedNode class, addNode/removeNode/moveToHead(DLinkedNode), and popTail return to supply cache key for removal
 */
     class LRUCache {
         class DLinkedNode {
@@ -46,7 +47,7 @@ public class LRU146 {
         private DLinkedNode head, tail;
 
         private void addNode(DLinkedNode node){ // always at after head
-            // head <--> 1 <--> 2 <--> tail. insert 3 after head. 
+            // head <--> 1 <--> 2 <--> tail. insert 3 after head.
             node.prev = head;
             node.next = head.next;
             // point to head
@@ -84,14 +85,14 @@ public class LRU146 {
             cache = new HashMap<>();
         }
 
-        
+
         public int get(int key) {
             DLinkedNode node = cache.get(key);
             if (node == null) return -1;
             moveToHead(node); // must move to head
             return node.value;
         }
-        
+
         public void put(int key, int value) {
             // add or update
             DLinkedNode node = cache.get(key);
@@ -120,16 +121,16 @@ public class LRU146 {
     Implement the LRUCache class:
     LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
     int get(int key) Return the value of the key if the key exists, otherwise return -1.
-    void put(int key, int value) Update the value of the key if the key exists. 
+    void put(int key, int value) Update the value of the key if the key exists.
     Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
     The functions get and put must each run in O(1) average time complexity.
-    
+
     Input: ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
     [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
     Output:[null, null, null, 1, null, -1, null, -1, 3, 4]
-    
+
     Left head, Right right; head 1 -> 2 -> 3 tail
-    LRUCache lRUCache = new LRUCache(2); 
+    LRUCache lRUCache = new LRUCache(2);
     lRUCache.put(1, 1); // cache is {(1,1)}
     lRUCache.put(2, 2); // cache is {(2,2),(1,1)}
     lRUCache.get(1);    // (1,1) more recent, cache is {(1,1), (2,2)} put to head; return 1
@@ -138,13 +139,13 @@ public class LRU146 {
     lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {(4,4), (3,3)}
     lRUCache.get(1);    // return -1 (not found)
     lRUCache.get(3);    // return 3
-    lRUCache.get(4);    // return 4   
+    lRUCache.get(4);    // return 4
 */
     /***************************************************************************************** */
     class LRUCacheLinkedHashMap {
         private final int CAPACITY; // use final, and upper case for constants
         private LinkedHashMap<Integer, Integer> map;
-    
+
         public LRUCache(int capacity) {
             map = new LinkedHashMap<>(capacity, 0.75f, true) {
                 protected boolean removeEldestEntry(Map.Entry<Integer, Integer> entry) {
@@ -153,21 +154,21 @@ public class LRU146 {
             };
             CAPACITY = capacity;
         }
-        
+
         public int get(int key) {
             return map.getOrDefault(key, -1); // if cannot find, return -1;
         }
-        
+
         public void put(int key, int value) {
             map.put(key, value);
         }
     }
 
-    
 
 
 
-    
+
+
 
 
 }
