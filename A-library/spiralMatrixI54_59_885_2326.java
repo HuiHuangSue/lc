@@ -147,3 +147,31 @@ class Solution {
         return res;
     }
 }
+
+// Input: rows = 5, cols = 6, rStart = 1, cStart = 4
+// Output: [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]
+public int[][] spiralMatrixIII885(int rows, int cols, int rStart, int cStart) {
+    int[][] res = new int[rows * cols][2];
+    // step1, 1 step to the right: row stays, col + 1
+    // step2, 1 step down: row+1, col stays
+    int[] dr = new int[]{0, 1, 0, -1};
+    int[] dc = new int[]{1, 0, -1, 0};
+    int count = 0;
+    res[count++] = new int[]{rStart, cStart}; // count++
+    // 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8...
+    for(int step = 1; step < 2*(rows+cols); step+=2){
+        for(int i = 0; i < 4; i++) { // 4 directions
+            int dStep = step + (i / 2); // k,k,k+1,k+1, 处理了两层，所以上面是k+2
+            for(int j = 0; j < dStep; j++) {// go j steps on ith direction
+                rStart += dr[i];
+                cStart += dc[i];
+                if(rStart>=0 && rStart<rows && cStart>=0 && cStart<cols){
+                    res[count++] = new int[]{rStart, cStart};//count++
+                    if(count == rows * cols) return res;
+                }
+            }
+        }
+    }
+    return res;
+
+}
