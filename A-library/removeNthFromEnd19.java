@@ -16,17 +16,33 @@ public class removeNthFromEnd19 {
  * }
  */
 class Solution {
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEnd19(ListNode head, int n) {
         // fast=head, stop when n>0, slow=dummy as want to keep pre-slow to delete
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode fast = head; 
+        ListNode fast = head;
         while (fast != null && n > 0) {
             fast = fast.next;
             n--;
         }
         ListNode slow = dummy;
         while(fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode fast = dummy, slow = dummy; // OR fast starts at head, slow start at dummy
+        while(n > 0 && fast != null) {
+            fast = fast.next;
+            n--;
+        }
+        while(fast.next != null) { // when fast starts from dummy, make sure stop 1 step early to allow SLOW stop before launching the node, to do deletion
             fast = fast.next;
             slow = slow.next;
         }
