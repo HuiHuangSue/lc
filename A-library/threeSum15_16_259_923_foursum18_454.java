@@ -163,3 +163,73 @@ public class 4SumII454 {
     }
 }
 
+
+class Solution {
+    // 3 <= arr.length <= 3000; 0 <= arr[i] <= 100; 0 <= target <= 300
+    // 0 <= arr[i] <= 100; can use int[] instead of map
+     public int threeSumMulti923(int[] arr, int target) {
+        int MOD = (int)(1e9 + 7);
+        long[] countMap = new long[101];//101, as 0...100
+        for (int a : arr) countMap[a]++;
+        long res = 0; //if not declare as long,
+        for (int i = 0; i <= 100; i++) // i is number, not index 是数字，不是index
+            for (int j = i; j <= 100; j++) { // can be reused like 3,3,3, so i, not i+1
+                int k = target - i - j;
+                if (k > 100 || k < 0) continue;
+                if (i == j && j == k) //C(n,3)=n!/((n-3)!(3!))=n!/(n-3)!/3!=n(n-1)(n-2)/(3*2)
+                    res += countMap[i] * (countMap[i] - 1) * (countMap[i] - 2) / 6;
+                else if (i == j && j != k)//C(i,2)*k-->i*(i-1)/2 *k
+                    res += countMap[i] * (countMap[i] - 1) / 2 * countMap[k];
+                else if (j < k)
+                    res += countMap[i] * countMap[j] * countMap[k];
+            }
+        return (int)(res % MOD);
+     }
+    public int threeSumMulti923(int[] arr, int target) {
+        int MOD = 1000000007;  // int MOD = 1_000_000_007;
+        // A: based on 3Sum, but build a map for counting different sums of two numbers.
+        // 自己之前的每一个数都和自己加一下，把sum存在map里；
+        // 在挪动到下一个数之前，把已有要找的数字（target-i)=sum 在map里找一下
+        Map<Integer, Integer> map = new HashMap<>();
+        int res = 0;
+        for (int i = 0; i < arr.length; i++) {
+            res = (res + map.getOrDefault(target - arr[i], 0)) % MOD; //add first加成大的数字, then mod
+            for (int j = 0; j < i; j++) {
+                int temp = arr[i] + arr[j];
+                map.put(temp, map.getOrDefault(temp, 0) + 1);
+            }
+        }
+        return res;
+    }
+    /* A trace through
+            1,1,2,2,3,3,4,4,5,5 t=8
+            index=0,n=1;
+            index=1,n=1:找8-1=7;
+                1+1
+                (2,1)
+            index=2,n=2:找8-2=6;
+                1+2,1+2
+                (2,1)(3,2)
+            index=3,n=2;找8-2=6;
+                1+2,1+2,2+2
+                (2,1)(3,4)(4,1)
+            index=4,n=3;找8-3=5;
+                1+3,1+3,2+3,2+3
+                (2,1)(3,4)(4,3)(5,2)
+            index=5,n=3;找8-3=5; +++++2
+                1+3,1+3,2+3,2+3,3+3
+                (2,1)(3,4)(4,5)(5,4)(6,1)
+            index=6,n=4;找8-4=4;  +++5
+                1+4,1+4,2+4,2+4,3+4,3+4
+                (2,1)(3,4)(4,5)(5,6)(6,2)(7,2)
+            index=7,n=4;找8-4=4; +++5
+                1+4,1+4,2+4,2+4,3+4,3+4,4+4
+                (2,1)(3,4)(4,5)(5,8)(6,4)(7,4),(8,1)
+            index=8,n=5;找8-5=3; +++4
+                1+5,1+5,2+5,2+5,3+5,3+5,4+5,4+5
+                (2,1)(3,4)(4,5)(5,8)(6,6)(7,6),(8,3),(9,2)
+            index=9,n=5;找8-5=3; ++++4
+                1+5,1+5,2+5,2+5,3+5,3+5,4+5,4+5,5+5
+                (2,1)(3,4)(4,5)(5,8)(6,8)(7,8),(8,5),(9,4),(10,1)
+            */
+}
