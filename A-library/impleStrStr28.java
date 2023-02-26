@@ -1,7 +1,7 @@
-public class impleStrSte28 {
+public class impleStrStr28 {
     /*
-     * Given two strings needle and haystack, 
-     * return the index of the first occurrence of needle in haystack, 
+     * Given two strings needle and haystack,
+     * return the index of the first occurrence of needle in haystack,
      * or -1 if needle is not part of haystack.
      */
 
@@ -11,7 +11,7 @@ public class impleStrSte28 {
     Output: 0
     Explanation: "sad" occurs at index 0 and 6.
     The first occurrence is at index 0, so we return 0.
-    
+
     Example 2:
     Input: haystack = "leetcode", needle = "leeto"
     Output: -1
@@ -31,3 +31,6 @@ public class impleStrSte28 {
     }
     // https://programmercarl.com/ 实现字符串--> strStr
 }
+
+// KMP
+
