@@ -96,13 +96,14 @@ nums = [4,5,6,7,0,1,2], target = 0; Output: 4
     3a- if [middle] < target < [right] then do recursion with middle + 1 (left), right
     3b- right side is sorted, but target not in here, search on left side left, middle -1 (right)
 */
+// 画图
 public int search33_inSortedArray(int[] nums, int target) {
     int left = 0, right = nums.length - 1;
     while(left <= right) { // left=right is legit
         int mid = left + (right - left) / 2;
         if(nums[mid] == target) {
             return mid;
-        } else if (nums[mid] >= nums[left]) {  // left is sorted; >=, [3,1],1 will->-1
+        } else if (nums[mid] >= nums[left]) {  // left is sorted; >=, [3,1],1 will->-1; =算给左边，因mid算的时候floor取整偏左
             // [left] <= target < [middle] do recursion with left, middle - 1 (right)
             if (target >= nums[left] && target < nums[mid]) right = mid - 1;
             // left side is sorted, but target not in, search on right side middle + 1 (left)
@@ -142,10 +143,13 @@ public boolean searchIjRotatedArray81_withDuplicates(int[] nums, int target) {
     return false;
 }
 
+// 画图。不断层，直线上升；断层，左边延长；断层，右边延长
 public int findMin153(int[] nums) {
     int left = 0, right = nums.length - 1;
     while(left < right) {
         int mid = left + (right - left) / 2;
+        // nums[mid]和nums[left]比没用，因为可能是从左至右直线上升(min在左边); 也可能是左边很长，然后断层(min在右边断层的地方)
+        // 与右边比的话，如果右边比中间高，min应该在左边
         if(nums[mid] > nums[right]) { // min肯定在右边
             left = mid + 1;
         } else { // [6,7,0,1,2,3,4], min在左边, mid<right也有可能是min，要保留

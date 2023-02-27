@@ -31,7 +31,7 @@ class Skiplist_1206 {
         while(insert && !sk.isEmpty()) { //coinflip为正，并且sk一直还在
             cur = sk.pop(); //从底层往高层pop，往后加node
             cur.next = new Node(num, cur.next, down); //cur.next一开始是之前的cur.next连上
-            down = cur.next; //设置好往上一层的down，连接新加的节点
+            down = cur.next; //设置好往上一层的down，连接新加的节点.  连在了新加的节点!!!
             insert = rand.nextDouble() < 0.5; // 决定下一层加不加
         }
         if(insert) head = new Node(-1, null, head);//顶上加一层，往下接好原来的head

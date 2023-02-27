@@ -77,6 +77,7 @@ public int maxProfit188_atMostKTrans(int k, int[] prices) {
     int[] sold = new int[k+1];
     Arrays.fill(hold, Integer.MIN_VALUE); // 要initiate成min，不然会一直是0
 
+    // for loop顺序不能换
     for (int p : prices) {
         for (int j = 1; j <= k; j++) { // k starts from 1, ends at k inclusive
             hold[j] = Math.max(sold[j-1] - p, hold[j]); //昨天卖了今天新买；昨天就hold着
@@ -102,7 +103,7 @@ public int maxProfit714(int[] prices, int fee) {
     for(int p : prices){
         int holdTmp = hold, soldTmp = sold; //转移的sold,虽然值相同
         //之前就hold,或者之前卖过又买了个; keep 'hold'value; prev_sold - p
-        hold = Math.max(holdTmp, sold - p);
+        hold = Math.max(holdTmp, sold - p); // SOLD-P, not o-P!!!!!!
         // 之前就卖了，现在又卖，然后进了P，减去fee
         sold = Math.max(soldTmp, hold + p - fee);//转移的hold,不是旧的holdTmp
     }
@@ -110,6 +111,7 @@ public int maxProfit714(int[] prices, int fee) {
 }
 
 // 不限次数，但 cooldown for a day
+// 类似recycle循环三角图. hold-> sold -> cooled -> hold
 public int maxProfit309_cooldown(int[] prices) {
     // hold, sold, cool
     int hold = Integer.MIN_VALUE, sold = 0, cooled = 0;
@@ -117,11 +119,11 @@ public int maxProfit309_cooldown(int[] prices) {
         //必须要用上一个值，不然会覆盖。不然就用array
         int holdPrev = hold, soldPrev = sold, cooledPrev = cooled;
          // 昨天就持有了; 昨天cool过了，今天可以买了
-        hold = Math.max(holdPrev, cooledPrev - p);
+        hold = Math.max(holdPrev, cooledPrev - p); //cool之后才能买，必须是cooledPrev-p, 而不是p; cooled一开始是0
         // 昨天不能是sold, 否则是cool；必须是持有，然后卖
-        sold = holdPrev + p;  // previous hold, not current hold!!!
+        sold = holdPrev + p;  // previous hold, not current hold!!! 前一天不可能卖过，所以只有一种情况
         // 昨天卖了； 昨天冷却今天还是冷却
-        cooled = Math.max(cooledPrev, soldPrev);
+        cooled = Math.max(cooledPrev, soldPrev); // 之前的cooled或者之前卖了今天要cool
     }
    return Math.max(cooled, sold); // 不然[1]会返回min_value
 }
