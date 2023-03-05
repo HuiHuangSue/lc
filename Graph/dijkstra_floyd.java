@@ -105,6 +105,7 @@ public class Floyd {
             for(int i = 0; i < matrix.length; i++) {
                 for(int j = 0; j < matrix.length; j++) {
                     // K as interconnected vertex, [ik]-->[kj] means from i to k, k to j...
+                    // Integer.MAX_VALUE 代表还不通
                     if(matrix[i][k] == INF || matrix[k][j] ==INF) continue;
                     matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);
                 }
