@@ -78,6 +78,7 @@ public class BST_search700_270_insert701_delete450 {
             if(root.left == null) return root.right; //来连接前面parent node, root.left=这个subtree
             if(root.right == null) return root.left;
             // 右边subtree的最小值
+            // right subtree all > currentNodeVal; minimum of right subtree has no left child, as already minimum
             TreeNode min = root.right;
             while(min.left != null) {
                 min = min.left;
