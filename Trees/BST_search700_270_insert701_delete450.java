@@ -84,6 +84,7 @@ public class BST_search700_270_insert701_delete450 {
                 min = min.left;
             }
             root.val = min.val; // replace current node's value to minValue
+            // to delete min.value, not key value; update RIGHT subtree
             root.right = deleteNode(root.right, min.val); // keep deleting right duplicated value, but now 1 child case, as it's the minimum and will have no left child
             return root;
 
