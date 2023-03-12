@@ -56,14 +56,17 @@ public class bubble_cocktail {
     }
 
     // 1,2,3,4,...., n-1 times
+    // 5 8 6 3 9 2 1 7
+    //   arr[i]=9: 9和3比; 9和6比; 9和8比; 9和5比
     public static void insertionSort(int[] arr) {
         for(int i = 1; i < arr.length; i++) {
             int insertVal = arr[i];
-            int j = i - 1;
+            int j = i - 1; // i开始，从后往前，每一对比较
             for(; j >= 0 && insertVal < arr[j]; j--) {
                 arr[j + 1] = arr[j];
             }
             arr[j+1] = insertVal;
         }
     }
+    ShellSort: group into pairs, distance /= 2; Unstable
 }

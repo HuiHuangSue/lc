@@ -1,6 +1,9 @@
-                    Avg         Worst                            Space           Stable
-Bubble/Cocktail     n^2         n^2                                1             Stable
-QuickSort           nlogn       N^2(pivot max/min)                logn           Un-Stable
-HeapSort            nlogn       nlogn                              1             Unstable
-Counting            n+m         n+m                                m             Can be Stable
-BucketSort          N           nlogn (1st桶n-1个元素mergeSort)     N             Stable
+                                Avg                                  Space
+Bubble/Cocktail/Insert         n^2                                    1             Stable
+Selection                      n^2                                    1             Un-Stable
+QuickSort                      nlogn; worst n^2(pivot max/min)        logn          Un-Stable
+HeapSort                       nlogn                                  1             Unstable
+MergeSort                      nlogn                                  N             Stable
+Counting                       n+m, m is range                        m             Can be Stable
+RadixSort                      k(n+m)                                 n+m           Stable
+BucketSort                     N, worst nlogn (1st桶n-1个元素mergeSort) N             Stable

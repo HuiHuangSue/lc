@@ -81,4 +81,32 @@ public class Count_Radix_Bucket_Sort {
         return res;
     }
 
+    // phone numbers, characters
+    // If different length, use 0 append to tail, treat as value < 'a'
+    public static final int ASCII_RANGE = 128;
+    public static String[] radixSort(String[] arr, int maxLen) {
+        String[] sortedArr = new String[arr.length]; // tmp sortedArr each round
+        for(int k = maxLen - 1; k >= 0; k--){
+            int[] count = new int[ASCII_RANGE];
+            for(int i = 0; i < arr.length; i++) {
+                int index = getCharIndex(arr[i], k);
+                count[index]++;
+            }
+            for(int i = 1; i < count.length; i++) {
+                count[i] = count[i] + count[i-1];
+            }
+            for(int i = arr.length - 1; i >= 0; i--) {
+                int index = getCharIndex(arr[i], k);
+                int sortedIndex = count[index] - 1;
+                sortedArr[sortedIndex] = arr[i];
+                count[index]--;
+            }
+            arr = sortedArr.clone(); // 下一轮以上一轮做基础;
+        }
+        return arr;
+    }
+    private static int getCharIndex(String str, int k) {
+        if(str.length() < (k+1)) return 0;
+        return str.charAt(k);
+    }
 }
